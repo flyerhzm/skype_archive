@@ -15,13 +15,13 @@ module Support
       DB[:participants].insert(:convo_id => myself_conversation_id, :identity => "gii.richard.huang")
 
       DB[:messages].insert(:convo_id => gree_conversation_id, :author => "gii.jason.lai", :from_dispname => "Jason Lai",
-                           :remote_id => 1, :body_xml => "text message 1", :type => 61, :timestamp => Time.now.to_i - 3600)
+                           :remote_id => 1, :body_xml => "gree message 1", :type => 61, :timestamp => Time.now.to_i - 3600)
       DB[:messages].insert(:convo_id => gree_conversation_id, :author => "gii.richard.huang", :from_dispname => "Richard Huang",
-                           :remote_id => 1, :body_xml => "text message 2", :type => 61, :timestamp => Time.now.to_i - 1800)
+                           :remote_id => 1, :body_xml => "gree message 2", :type => 61, :timestamp => Time.now.to_i - 1800)
       DB[:messages].insert(:convo_id => gree_conversation_id, :author => "gii.jason.lai", :from_dispname => "Jason Lai / (赖)",
-                           :remote_id => 1, :body_xml => "text message 3", :type => 61, :timestamp => Time.now.to_i)
+                           :remote_id => 1, :body_xml => "gree message 3", :type => 61, :timestamp => Time.now.to_i)
       DB[:messages].insert(:convo_id => myself_conversation_id, :author => "gii.richard.huang", :from_dispname => "Richard Huang",
-                           :remote_id => 1, :body_xml => "text message 11", :type => 61, :timestamp => Time.now.to_i)
+                           :remote_id => 1, :body_xml => "self message 11", :type => 61, :timestamp => Time.now.to_i)
       DB[:messages].insert(:convo_id => myself_conversation_id, :author => "flyerhzm", :from_dispname => "Richard Huang",
                            :remote_id => 1, :body_xml => "
 <partlist alt=\"\">

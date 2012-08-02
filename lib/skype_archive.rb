@@ -3,6 +3,5 @@ require "sqlite3"
 require "sequel"
 
 module SkypeArchive
-  def search
-  end
+  autoload :Model, "skype_archive/model"
 end
