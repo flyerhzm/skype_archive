@@ -1,5 +1,8 @@
 require "skype_archive/version"
+require "sqlite3"
+require "sequel"
 
 module SkypeArchive
-  # Your code goes here...
+  def search
+  end
 end

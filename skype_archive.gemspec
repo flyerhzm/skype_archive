@@ -14,4 +14,9 @@ Gem::Specification.new do |gem|
   gem.name          = "skype_archive"
   gem.require_paths = ["lib"]
   gem.version       = SkypeArchive::VERSION
+
+  gem.add_dependency "sqlite3"
+  gem.add_dependency "sequel"
+
+  gem.add_development_dependency "rspec"
 end
