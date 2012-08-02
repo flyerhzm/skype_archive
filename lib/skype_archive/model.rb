@@ -9,8 +9,12 @@ module SkypeArchive
       @account_name = account_name
     end
 
-    def search(text)
-      connection[:Messages].where("type = ? and body_xml LIKE ?", 61, "%#{text}%").all
+    def search(text, options={})
+      if options[:skypename]
+        connection[:Messages].filter(:type => 61).filter("body_xml LIKE ?", "%#{text}%").filter(:author => options[:skypename]).all
+      else
+        connection[:Messages].filter(:type => 61).filter("body_xml LIKE ?", "%#{text}%").all
+      end
     end
 
     private
