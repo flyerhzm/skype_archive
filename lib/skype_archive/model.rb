@@ -17,12 +17,13 @@ module SkypeArchive
         convo_ids = connection[:Conversations].filter("displayname LIKE ?", "%#{options[:conversation]}%").all.map { |convo| convo[:id] }
         query = query.filter("convo_id in ?", convo_ids)
       end
-      query.all
+      query = query.select(:author, :from_dispname, :body_xml, :timestamp)
+      query.all.map { |attrs| Message.new(attrs) }
     end
 
     private
       def connection
-        @connection ||= Sequel.sqlite('/Library/Application\ Support/Skype/#{account_name}/main.db')
+        @connection ||= Sequel.sqlite(File.expand_path("~/Library/Application\ Support/Skype/#{account_name}/main.db"))
       end
   end
 end
