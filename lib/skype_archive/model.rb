@@ -10,11 +10,10 @@ module SkypeArchive
     end
 
     def search(text, options={})
-      if options[:skypename]
-        connection[:Messages].filter(:type => 61).filter("body_xml LIKE ?", "%#{text}%").filter(:author => options[:skypename]).all
-      else
-        connection[:Messages].filter(:type => 61).filter("body_xml LIKE ?", "%#{text}%").all
-      end
+      query = connection[:Messages].filter(:type => 61).filter("body_xml LIKE ?", "%#{text}%")
+      query = query.filter(:author => options[:skypename]) if options[:skypename]
+      query = query.filter("timestamp > ?", options[:timestamp]) if options[:timestamp]
+      query.all
     end
 
     private

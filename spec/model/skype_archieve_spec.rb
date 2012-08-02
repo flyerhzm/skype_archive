@@ -18,4 +18,9 @@ describe SkypeArchive::Model do
   it "should search by user" do
     model.search("message", :skypename => "gii.jason.lai").should have(2).items
   end
+
+  it "should search by timestamp" do
+    timestamp = Time.now.to_i - 2400
+    model.search("message", :timestamp => timestamp).should have(3).items
+  end
 end
