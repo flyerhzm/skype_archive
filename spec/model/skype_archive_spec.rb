@@ -23,4 +23,8 @@ describe SkypeArchive::Model do
     timestamp = Time.now.to_i - 2400
     model.search("message", :timestamp => timestamp).should have(3).items
   end
+
+  it "should search by conversation" do
+    model.search("message", :conversation => "flyerhzm").should have(1).item
+  end
 end

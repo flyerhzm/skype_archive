@@ -13,6 +13,10 @@ module SkypeArchive
       query = connection[:Messages].filter(:type => 61).filter("body_xml LIKE ?", "%#{text}%")
       query = query.filter(:author => options[:skypename]) if options[:skypename]
       query = query.filter("timestamp > ?", options[:timestamp]) if options[:timestamp]
+      if options[:conversation]
+        convo_ids = connection[:Conversations].filter("displayname LIKE ?", "%#{options[:conversation]}%").all.map { |convo| convo[:id] }
+        query = query.filter("convo_id in ?", convo_ids)
+      end
       query.all
     end
 
