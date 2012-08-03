@@ -38,27 +38,24 @@ describe SkypeArchive::Model do
 
     it "should sync_conversations" do
       stub_request(:post, "#{SkypeArchive::URL}/conversations")
-      model.sync_conversations.should have(2).items
+      model.sync_conversations.should have(1).items
     end
 
     it "should sync_participants" do
       stub_request(:post, "#{SkypeArchive::URL}/conversations")
       stub_request(:post, "#{SkypeArchive::URL}/conversations/JGdpaS5qYXNvbi5sYWkvMTIzNDU2Nzg5/participants")
-      stub_request(:post, "#{SkypeArchive::URL}/conversations/Zmx5ZXJoem0=/participants")
       model.sync_participants
     end
 
     it "should sync_message" do
       stub_request(:post, "#{SkypeArchive::URL}/conversations")
       stub_request(:post, "#{SkypeArchive::URL}/conversations/JGdpaS5qYXNvbi5sYWkvMTIzNDU2Nzg5/messages")
-      stub_request(:post, "#{SkypeArchive::URL}/conversations/Zmx5ZXJoem0=/messages")
       model.sync_messages
     end
 
     it "should sync_message with start_time and end_time" do
       stub_request(:post, "#{SkypeArchive::URL}/conversations")
-      stub_request(:post, "#{SkypeArchive::URL}/conversations/JGdpaS5qYXNvbi5sYWkvMTIzNDU2Nzg5/messages")
-      model.sync_messages(Time.now.to_i - 4000, Time.now.to_i - 1000)
+      model.sync_messages(Time.now.to_i + 1, Time.now.to_i + 1000)
     end
   end
 end

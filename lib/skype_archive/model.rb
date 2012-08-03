@@ -41,7 +41,7 @@ module SkypeArchive
     end
 
     def sync_conversations
-      @conversations = connection[:Conversations].select(:id, :identity, :displayname).all
+      @conversations = connection[:Conversations].filter(:type => 2).select(:id, :identity, :displayname).all
       RestClient.post "#{URL}/conversations", @conversations.to_json, :content_type => :json, :accept => :json
       @conversations
     end

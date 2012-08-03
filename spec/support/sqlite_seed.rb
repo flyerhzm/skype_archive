@@ -6,8 +6,8 @@ module Support
       flyerhzm = DB[:contacts].insert(:skypename => "flyerhzm", :displayname => "Richard Huang")
       jason = DB[:contacts].insert(:skypename => "gii.jason.lai", :displayname => "Jason Lai")
 
-      gree_conversation_id = DB[:conversations].insert(:identity => "$gii.jason.lai/123456789", :displayname => "GREE")
-      myself_conversation_id = DB[:conversations].insert(:identity => "flyerhzm", :displayname => "flyerhzm")
+      gree_conversation_id = DB[:conversations].insert(:type => 2, :identity => "$gii.jason.lai/123456789", :displayname => "GREE")
+      myself_conversation_id = DB[:conversations].insert(:type => 1, :identity => "flyerhzm", :displayname => "flyerhzm")
 
       DB[:participants].insert(:convo_id => gree_conversation_id, :identity => "gii.jason.lai")
       DB[:participants].insert(:convo_id => gree_conversation_id, :identity => "gii.richard.huang")
@@ -45,6 +45,7 @@ module Support
 
       DB.create_table :conversations do
         primary_key :id
+        Integer :type
         String :identity
         String :displayname
       end
