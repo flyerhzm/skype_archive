@@ -7,9 +7,12 @@ if File.exists? plist_path
   system "launchctl unload #{plist_path}"
 end
 
+puts "downloading jp.co.gree.skype_archive.plist..."
 system "curl -o jp.co.gree.skype_archive.plist https://raw.github.com/flyerhzm/skype_archive/master/jp.co.gree.skype_archive.plist"
 
 FileUtils.mv "jp.co.gree.skype_archive.plist", plist_path
 system "launchctl setenv PATH #{ENV['PATH']}"
 system "launchctl setenv GEM_PATH #{ENV['GEM_PATH']}"
 system "launchctl load #{plist_path}"
+
+puts "skype_archive installed successfully"
