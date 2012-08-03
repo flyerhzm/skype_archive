@@ -2,6 +2,7 @@ require "skype_archive/version"
 require "sqlite3"
 require "sequel"
 require "json"
+require "chronic"
 
 module SkypeArchive
   URL = "http://qa1.api.openfeint.com:8088"
@@ -9,8 +10,11 @@ module SkypeArchive
   autoload :Model, "skype_archive/model"
   autoload :Message, "skype_archive/message"
 
-  def self.search(account_name, text)
-    Model.new(account_name).search(text)
+  def self.search(account_name, text, options={})
+    if options[:from]
+      options[:timestamp] = Chronic.parse(options[:from]).to_i
+    end
+    Model.new(account_name).search(text, options)
   end
 
   def self.sync
