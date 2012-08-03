@@ -4,6 +4,8 @@ require "sequel"
 require "json"
 
 module SkypeArchive
+  URL = "http://localhost"
+
   autoload :Model, "skype_archive/model"
   autoload :Message, "skype_archive/message"
 

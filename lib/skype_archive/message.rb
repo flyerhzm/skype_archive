@@ -8,6 +8,10 @@ module SkypeArchive
       @attributes[:created_at] = Time.at(@timestamp)
     end
 
+    def to_json(*opts)
+      @attributes.to_json(*opts)
+    end
+
     def method_missing(method, *args, &block)
       @attributes[method.to_sym] or super
     end

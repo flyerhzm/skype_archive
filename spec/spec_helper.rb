@@ -1,6 +1,7 @@
 require 'rspec'
 require 'skype_archive'
 require 'support/sqlite_seed'
+require 'webmock/rspec'
 
 DB = Sequel.sqlite
 
