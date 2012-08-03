@@ -1,12 +1,13 @@
 require "sqlite3"
 require "sequel"
-require "active_support/core_ext"
 require "rest_client"
 require "json"
 require "base64"
 
 module SkypeArchive
   class Model
+    LAST_SYNC_FILE = "/tmp/skype_archive_last_sync"
+
     attr_reader :account_name
 
     def initialize(account_name)
@@ -26,12 +27,13 @@ module SkypeArchive
     end
 
     def sync
-      start_time = Time.now.yesterday.at_beginning_of_day.to_i
-      end_time = Time.now.yesterday.at_midnight.to_i
+      start_time = last_sync_time
+      end_time = Time.now.to_i
       sync_contacts
       sync_conversations
       sync_participants
       sync_messages(start_time, end_time)
+      update_sync_file(end_time)
     end
 
     def sync_contacts
@@ -67,6 +69,20 @@ module SkypeArchive
           url = "#{URL}/conversations/#{Base64.encode64(convo[:identity])[0...-1]}/messages"
           RestClient.post url, messages.to_json, :content_type => :json, :accept => :json
         end
+      end
+    end
+
+    def last_sync_time
+      if File.exists?(LAST_SYNC_FILE)
+        File.read(LAST_SYNC_FILE).to_i
+      else
+        Time.now.to_i - 3600 * 24 * 30
+      end
+    end
+
+    def update_sync_file(time)
+      File.open(LAST_SYNC_FILE, 'w') do |file|
+        file.puts time
       end
     end
 
