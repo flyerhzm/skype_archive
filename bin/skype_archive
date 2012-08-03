@@ -27,6 +27,9 @@ else
   account_name = ARGV.first
   text = ARGV.last
   SkypeArchive.search(account_name, text).each do |message|
-    printf "%20s [%s]: %s\n", message.from_dispname, message.created_at.strftime("%Y-%m-%d %H:%M:%S"), message.body_xml.gsub(text, "\e[1m\e[34m#{text}\e[0m")
+    printf "[%s] %-20s: %s\n", message.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+                               message.from_dispname,
+                               message.body_xml.gsub(text, "\e[1m\e[34m#{text}\e[0m")
   end
 end
+
