@@ -4,7 +4,7 @@ require "sequel"
 require "json"
 
 module SkypeArchive
-  URL = "http://localhost"
+  URL = "http://qa1.api.openfeint.com:8088"
 
   autoload :Model, "skype_archive/model"
   autoload :Message, "skype_archive/message"
