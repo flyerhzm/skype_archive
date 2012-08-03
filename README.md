@@ -19,11 +19,7 @@ skype archive for gii hackathon
 ## Example
 
     skype_archive search gii.richard.huang ruby
-    skype_archive search gii.richard.huang --conversation Operations
-ruby
-    skype_archive search gii.richard.huang --conversation Operations
---from "1 month ago" ruby
-    skype_archive search gii.richard.huang --conversation Operations
---from "1 month ago" ruby
-    skype_archive search gii.richard.huang --conversation Operations
---from "1 month ago" --author Jason ruby
+    skype_archive search gii.richard.huang --conversation Operations ruby
+    skype_archive search gii.richard.huang --conversation Operations --from "1 month ago" ruby
+    skype_archive search gii.richard.huang --conversation Operations --from "1 month ago" ruby
+    skype_archive search gii.richard.huang --conversation Operations --from "1 month ago" --author Jason ruby
