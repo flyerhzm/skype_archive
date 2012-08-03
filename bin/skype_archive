@@ -15,6 +15,10 @@ OptionParser.new do |opts|
     options[:author] = author
   end
 
+  opts.on("--conversation CONVERSATION", "search which channel") do |conversation|
+    options[:conversation] = conversation
+  end
+
   opts.on("--from TIME", "search the message from when") do |from|
     options[:from] = from
   end
