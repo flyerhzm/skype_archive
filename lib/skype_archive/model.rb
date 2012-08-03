@@ -1,6 +1,6 @@
 require "sqlite3"
 require "sequel"
-require "active_support/core_ext/time/calculations"
+require "active_support/core_ext"
 require "rest_client"
 require "json"
 require "base64"

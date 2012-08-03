@@ -7,10 +7,16 @@ require 'optparse'
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = "Usage: skype_archive account_name [options] search_text"
+  opts.banner = "Usage:\n
+  skype_archive search account_name [options] search_text\n
+  skype_archive sync"
 
-  opts.on("-f", "--from", "who sent the message") do |from|
+  opts.on("--from", "who sent the message") do |from|
     options['from'] = from
+  end
+
+  opts.on("--sync", "sync local messages to remote server") do |sync|
+    options['sync'] = true
   end
 
   opts.on_tail("-h", "--help", "Show this message") do
@@ -21,15 +27,20 @@ OptionParser.new do |opts|
   opts.parse!
 end
 
-if ARGV.size < 2
-  puts "account_name and message must be assigned"
+if ARGV.size == 0
+  puts "wrong usage, see skype_archive -h"
 else
-  account_name = ARGV.first
-  text = ARGV.last
-  SkypeArchive.search(account_name, text).each do |message|
-    printf "[%s] %-20s: %s\n", message.created_at.strftime("%Y-%m-%d %H:%M:%S"),
-                               message.from_dispname,
-                               message.body_xml.gsub(text, "\e[1m\e[34m#{text}\e[0m")
+  command = ARGV.first
+  if command == "search"
+    account_name = ARGV[1]
+    text = ARGV.last
+    SkypeArchive.search(account_name, text).each do |message|
+      printf "[%s] %-20s: %s\n", message.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+                                 message.from_dispname,
+                                 message.body_xml.gsub(text, "\e[1m\e[34m#{text}\e[0m")
+    end
+  elsif command == "sync"
+    SkypeArchive.sync
   end
 end
 
