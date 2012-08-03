@@ -1,7 +1,7 @@
 require 'fileutils'
 
 puts "installing skype_archive gem..."
-if ENV['GEM_PATH'].start_with? ENV['HOME']
+if ENV['GEM_PATH'] && ENV['GEM_PATH'].start_with?(ENV['HOME'])
   system "gem install skype_archive"
 else
   system "sudo gem install skype_archive"
